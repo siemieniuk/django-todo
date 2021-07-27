@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+Hello, {{ user.username }}
+
+{% if tasks.count == 0 %}
+<p>No tasks registered</p>
+{% else %}
+<div class='container'>
+  <table class='table'>
+    <thead>
+      <th scope='col'>Name</th>
+      <th scope='col'>Created</th>
+      <th scope='col'>Status</th>
+    </thead>
+    <tbody>
+{% for task in tasks %}
+      <tr>
+        <td>{{ task.name }}</td>
+        <td>{{ task.created }}</td>
+        <td>{{ task.status }}</td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+  </div>
+</div>
+{% endblock %}

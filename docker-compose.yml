@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: mysql5_7-todo
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+       MYSQL_DATABASE: todoapp
+       MYSQL_ROOT_USER: root
+       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - .dbdata:/var/lib/mysql
+  web:
+    build: .
+    container_name: nginx-todo
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./myproject:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
