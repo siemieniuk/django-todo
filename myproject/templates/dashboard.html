@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-Hello, {{ user.username }}
 
-{% if tasks.count == 0 %}
-<p>No tasks registered</p>
-{% else %}
 <div class='container'>
+  <p>Hello, {{ user.username }}</p>
+  <form>
+    {{ newtaskform }}
+    <button class='btn btn-primary' role='button'>Create</button>
+  </form>
+{% if tasks.count == 0 %}
+  <p>No tasks registered</p>
+{% else %}
   <table class='table'>
     <thead>
       <th scope='col'>Name</th>
@@ -13,16 +17,15 @@ Hello, {{ user.username }}
       <th scope='col'>Status</th>
     </thead>
     <tbody>
-{% for task in tasks %}
+    {% for task in tasks %}
       <tr>
         <td>{{ task.name }}</td>
         <td>{{ task.created }}</td>
         <td>{{ task.status }}</td>
       </tr>
-{% endfor %}
+    {% endfor %}
     </tbody>
   </table>
 {% endif %}
-  </div>
 </div>
 {% endblock %}

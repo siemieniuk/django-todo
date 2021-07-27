@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import LoginForm
+from .forms import LoginForm, NewTaskForm
 from .models import Task
 
 # Create your views here.
@@ -13,12 +13,14 @@ def index_view(request):
 def dashboard_view(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(author = request.user.id)
+        newtaskform = NewTaskForm()
         return render(
             request,
             'dashboard.html',
             {
                 'user': request.user,
-                'tasks': tasks
+                'tasks': tasks,
+                'newtaskform': newtaskform,
             }
         )
     return redirect(index_view)
