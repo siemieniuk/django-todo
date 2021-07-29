@@ -3,7 +3,7 @@
 <html lang="pl" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}Todoapp</title>
+    <title>{% block title %}{% endblock %} | Todoapp</title>
     <meta name="author" content="Szymon Siemieniuk">
     <meta name="description" content="Task manager">
     <meta name="keywords" content="todo, app, task manager, task, manager, Szymon, Siemieniuk, Szymon Siemieniuk">
@@ -11,18 +11,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   </head>
   <body>
-    <nav class='navbar navbar-expand-lg'>
+    <nav class='navbar navbar-expand-lg bg-light'>
+      <a class='navbar-brand ml-2' href="{% url 'index' %}">TODOapp</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     {% if request.user.is_authenticated %}
         <li class='nav-item active'>
-          <a class='nav-link' href={% url 'logout' %}>Logout</a>
+          <a class='nav-link' href="{% url 'logout' %}">Logout</a>
         </li>
     {% else %}
         <li class='nav-item active'>
-          <a class='nav-link' href={% url 'login' %}>Login</a>
+          <a class='nav-link' href="{% url 'login' %}">Login</a>
         </li>
         <li class='nav-item active'>
-          <a class='nav-link' href={% url 'register' %}>Register</a>
+          <a class='nav-link' href="{% url 'register' %}">Register</a>
         </li>
     {% endif %}
       </ul>
