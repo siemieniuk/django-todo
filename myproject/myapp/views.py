@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import LoginForm, NewTaskForm, RegisterForm
+from .forms import *
 from .models import Task
 
 
@@ -96,3 +96,18 @@ def task_delete_view(request, task_id):
         if task.author == request.user:
             task.delete()
         return redirect('dashboard')
+
+
+def task_rename_view(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = RenameTaskForm(request.POST)
+        try:
+            task = Task.objects.get(id=form.cleaned_data['task_id'])
+        except Task.DoesNotExist:
+            return redirect('dashboard')
+        if task.author == request.user:
+            task.title = form.cleaned_data['title']
+            task.save()
+            return redirect('dashboard')
+        return redirect('dashboard')
+
