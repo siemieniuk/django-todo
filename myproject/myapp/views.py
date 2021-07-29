@@ -35,7 +35,7 @@ def create_task_view(request):
             name = form.cleaned_data['title']
             task = Task(name=name, author=request.user)
             task.save()
-        return redirect(dashboard_view)
+        return redirect('dashboard')
 
 def delete_task_view(request):
     if request.method == 'GET' and request.user.is_authenticated:
