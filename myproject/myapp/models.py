@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 STATUS_CHOICES = ('created', 'running', 'completed')
 
+
 class Task(models.Model):
 
     class Status(models.IntegerChoices):
@@ -20,7 +21,7 @@ class Task(models.Model):
         auto_now_add=True
         )
     author = models.ForeignKey(
-        User, 
+        User,
         on_delete=models.CASCADE
         )
     status = models.IntegerField(
