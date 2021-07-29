@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}{{ user.username }}'s tasks{% endblock %}
 {% block content %}
-<div class='container'>
   <p>Hello, {{ user.username }}</p>
-  <form>
+  <form action="{% url 'new_task' %}" method="post">
+    {% csrf_token %}
     {{ newtaskform }}
     <button class='btn btn-primary' role='button'>Create</button>
   </form>
@@ -15,17 +15,18 @@
       <th scope='col'>Name</th>
       <th scope='col'>Created</th>
       <th scope='col'>Status</th>
+      <th scope='col'></th>
     </thead>
     <tbody>
     {% for task in tasks %}
       <tr>
-        <td>{{ task.id }}: {{ task.name }}</td>
-        <td>{{ task.created }}</td>
+        <td>{{ task.name }}</td>
+        <td>{{ task.created|date:'H:m, d b Y' }}</td>
         <td>{{ task.status }}</td>
+        <td><a href="{% url 'delete_task' task_id=task.id %}">DEL</a></td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
 {% endif %}
-</div>
 {% endblock %}
