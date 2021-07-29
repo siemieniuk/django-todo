@@ -5,10 +5,13 @@ from .models import Task
 
 # Create your views here.
 def index_view(request):
-    return render(
-        request,
-        'index.html'
-    )
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        return render(
+            request,
+            'index.html'
+        )
 
 def dashboard_view(request):
     if request.user.is_authenticated:
@@ -23,7 +26,7 @@ def dashboard_view(request):
                 'newtaskform': newtaskform,
             }
         )
-    return redirect(index_view)
+    return redirect('index')
 
 def create_task_view(request):
     if request.method == 'POST' and request.user.is_authenticated:
@@ -49,7 +52,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect(dashboard_view)
+                return redirect('dashboard')
 
     return render(
         request,
@@ -66,6 +69,13 @@ def logout_view(request):
 def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('dashboard')
     else:
         form = RegisterForm()
     return render(
