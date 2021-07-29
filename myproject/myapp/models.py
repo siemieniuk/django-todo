@@ -27,4 +27,7 @@ class Task(models.Model):
     status = models.IntegerField(
         choices=Status.choices,
         default=0
-        )
+    )
+
+    def get_status(self):
+        return f'{self.Status(self.status).label}'
