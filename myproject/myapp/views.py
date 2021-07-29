@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import LoginForm, NewTaskForm
+from .forms import LoginForm, NewTaskForm, RegisterForm
 from .models import Task
 
 # Create your views here.
@@ -48,3 +48,16 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+    else:
+        form = RegisterForm()
+    return render(
+        request,
+        'register.html',
+        {
+            'form': form
+        }
+    )
