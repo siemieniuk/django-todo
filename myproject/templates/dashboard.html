@@ -22,7 +22,7 @@
       <tr>
         <td>{{ task.name }}</td>
         <td>{{ task.created|date:'H:m, d b Y' }}</td>
-        <td>{{ task.status }}</td>
+        <td>{{ task.get_status }}</td>
         <td><a href="{% url 'delete_task' task_id=task.id %}">DEL</a></td>
       </tr>
     {% endfor %}
