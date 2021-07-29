@@ -30,27 +30,6 @@ def dashboard_view(request):
     return redirect('index')
 
 
-def create_task_view(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        form = NewTaskForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['title']
-            task = Task(name=name, author=request.user)
-            task.save()
-        return redirect('dashboard')
-
-
-def delete_task_view(request, task_id):
-    if request.method == 'GET' and request.user.is_authenticated:
-        try:
-            task = Task.objects.get(id=task_id)
-        except Task.DoesNotExist:
-            return redirect('dashboard')
-        if task.author == request.user:
-            task.delete()
-        return redirect('dashboard')
-
-
 def login_view(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -96,3 +75,24 @@ def register_view(request):
             'form': form
         }
     )
+
+
+def task_create_view(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = NewTaskForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['title']
+            task = Task(name=name, author=request.user)
+            task.save()
+        return redirect('dashboard')
+
+
+def task_delete_view(request, task_id):
+    if request.method == 'GET' and request.user.is_authenticated:
+        try:
+            task = Task.objects.get(id=task_id)
+        except Task.DoesNotExist:
+            return redirect('dashboard')
+        if task.author == request.user:
+            task.delete()
+        return redirect('dashboard')
