@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h2>Login</h2>
-<form method="post">
+<form action="{% url 'login' %}" autocomplete="on" method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="btn-group mt-2" role="group">
