@@ -40,10 +40,10 @@ def create_task_view(request):
         return redirect('dashboard')
 
 
-def delete_task_view(request):
+def delete_task_view(request, task_id):
     if request.method == 'GET' and request.user.is_authenticated:
         try:
-            task = Task.objects.get(id=request.get.id)
+            task = Task.objects.get(id=task_id)
         except Task.DoesNotExist:
             return redirect('dashboard')
         if task.author == request.user:
