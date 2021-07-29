@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% block title %}Hello, {{ user.username }}{% endblock %}
 {% block content %}
-
-<div class='container'>
-  <p>Hello, {{ user.username }}</p>
-  <form>
-    {{ newtaskform }}
-    <button class='btn btn-primary' role='button'>Create</button>
+  <h1>Hello, {{ user.username }}</h1>
+  <form action="{% url 'newtask' %}" method='post'>
+    <div class="input-group mb-3">
+      {% csrf_token %}
+      {{ newtaskform.title }}
+      <button class='btn btn-primary' role='button'>Create</button>
+    </div>
   </form>
 {% if tasks.count == 0 %}
   <p>No tasks registered</p>
@@ -27,5 +29,4 @@
     </tbody>
   </table>
 {% endif %}
-</div>
 {% endblock %}
