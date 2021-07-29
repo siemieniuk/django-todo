@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import LoginForm, NewTaskForm, RegisterForm
 from .models import Task
 
-# Create your views here.
+
 def index_view(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
@@ -12,6 +12,7 @@ def index_view(request):
             request,
             'index.html'
         )
+
 
 def dashboard_view(request):
     if request.user.is_authenticated:
@@ -28,6 +29,7 @@ def dashboard_view(request):
         )
     return redirect('index')
 
+
 def create_task_view(request):
     if request.method == 'POST' and request.user.is_authenticated:
         form = NewTaskForm(request.POST)
@@ -37,9 +39,16 @@ def create_task_view(request):
             task.save()
         return redirect('dashboard')
 
+
 def delete_task_view(request):
     if request.method == 'GET' and request.user.is_authenticated:
-        pass
+        try:
+            task = Task.objects.get(id=request.get.id)
+        except Task.DoesNotExist:
+            return redirect('dashboard')
+        if task.author == request.user:
+            task.delete()
+        return redirect('dashboard')
 
 
 def login_view(request):
@@ -62,9 +71,11 @@ def login_view(request):
         }
     )
 
+
 def logout_view(request):
     logout(request)
     return redirect('index')
+
 
 def register_view(request):
     if request.method == 'POST':
