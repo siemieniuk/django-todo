@@ -12,7 +12,7 @@ def index_view(request):
 
 def dashboard_view(request):
     if request.user.is_authenticated:
-        tasks = Task.objects.filter(author = request.user.id)
+        tasks = Task.objects.filter(author=request.user.id)
         newtaskform = NewTaskForm()
         return render(
             request,
@@ -24,6 +24,20 @@ def dashboard_view(request):
             }
         )
     return redirect(index_view)
+
+def create_task_view(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = NewTaskForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['title']
+            task = Task(name=name, author=request.user)
+            task.save()
+        return redirect(dashboard_view)
+
+def delete_task_view(request):
+    if request.method == 'GET' and request.user.is_authenticated:
+        pass
+
 
 def login_view(request):
     form = LoginForm()
