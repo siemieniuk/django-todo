@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-30 00:47+0000\n"
+"POT-Creation-Date: 2021-07-30 09:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: myapp/forms.py:21
+msgid "New task"
+msgstr "Nowe zadanie"
 
 #: myapp/models.py:13
 msgid "created"
@@ -56,20 +60,33 @@ msgstr "Witaj, %(nick)s!"
 
 #: templates/dashboard.html:10
 msgid "Create"
-msgstr "Stwórz"
+msgstr "Utwórz"
 
 #: templates/dashboard.html:14
 msgid "No tasks registered"
 msgstr "Nie znaleziono żadnych zadań"
 
 #: templates/dashboard.html:18
+#, fuzzy
+#| msgid "Name"
+msgctxt "Table column"
 msgid "Name"
 msgstr "Nazwa"
 
 #: templates/dashboard.html:19
+#, fuzzy
+#| msgid "Created"
+msgctxt "Table column; specifies WHEN was the task created"
 msgid "Created"
 msgstr "Data utworzenia"
 
 #: templates/dashboard.html:20
+#, fuzzy
+#| msgid "Status"
+msgctxt "Table column"
 msgid "Status"
 msgstr "Status"
+
+#: templates/login.html:11
+msgid "Sign in"
+msgstr "Zaloguj"
