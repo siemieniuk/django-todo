@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
   <head>
@@ -12,21 +13,23 @@
   </head>
   <body>
     <nav class='navbar navbar-expand-lg bg-light'>
-      <a class='navbar-brand ml-2' href="{% url 'index' %}">TODOapp</a>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    {% if request.user.is_authenticated %}
-        <li class='nav-item active'>
-          <a class='nav-link' href="{% url 'logout' %}">Logout</a>
-        </li>
-    {% else %}
-        <li class='nav-item active'>
-          <a class='nav-link' href="{% url 'login' %}">Login</a>
-        </li>
-        <li class='nav-item active'>
-          <a class='nav-link' href="{% url 'register' %}">Register</a>
-        </li>
-    {% endif %}
-      </ul>
+      <div class='container-fluid'>
+        <a class='navbar-brand ml-2' href="{% url 'index' %}">TODOapp</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      {% if request.user.is_authenticated %}
+          <li class='nav-item active'>
+            <a class='nav-link' href="{% url 'logout' %}">{% trans "Logout" %}</a>
+          </li>
+      {% else %}
+          <li class='nav-item active'>
+            <a class='nav-link' href="{% url 'login' %}">{% trans "Login" %}</a>
+          </li>
+          <li class='nav-item active'>
+            <a class='nav-link' href="{% url 'register' %}">{% trans "Register" %}</a>
+          </li>
+      {% endif %}
+        </ul>
+      </div>
     </nav>
     <div class='container'>
     {% block content %}

@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
-{% block title %}{{ user.username }}'s tasks{% endblock %}
+{% load i18n %}
+{% block title %}{% blocktrans with nick=user.username %}{{ nick }}'s tasks{% endblocktrans %}{% endblock %}
 {% block content %}
-  <p>Hello, {{ user.username }}</p>
+  <h1 class='mt-3 mb-2'>{% blocktrans with nick=user.username %}Hello, {{ nick }}!{% endblocktrans %}</h1>
   <form action="{% url 'new_task' %}" method="post">
     {% csrf_token %}
-    {{ newtaskform }}
-    <button class='btn btn-primary' role='button'>Create</button>
+    <div class='input-group'>
+      {{ newtaskform }}
+      <button class='btn btn-primary' role='button'>{% trans "Create" %}</button>
+    </div>
   </form>
 {% if tasks.count == 0 %}
-  <p>No tasks registered</p>
+  <p>{% trans "No tasks registered" %}</p>
 {% else %}
   <table class='table'>
     <thead>
-      <th scope='col'>Name</th>
-      <th scope='col'>Created</th>
-      <th scope='col'>Status</th>
+      <th scope='col'>{% trans "Name" %}</th>
+      <th scope='col'>{% trans "Created" %}</th>
+      <th scope='col'>{% trans "Status" %}</th>
       <th scope='col'></th>
     </thead>
     <tbody>

@@ -5,5 +5,7 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt && \
-    pip install mysqlclient
+    pip install mysqlclient && \
+    apt-get update && \
+    apt-get install -y gettext
 COPY . /code/
