@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 {% block title %}Login{% endblock %}
 {% block content %}
 <h2>Login</h2>
@@ -7,7 +8,7 @@
     {% csrf_token %}
     {{ form|crispy }}
     <div class="btn-group mt-2" role="group">
-        <button class='btn btn-outline-primary' type='submit'>Sign in</button>
+        <button class='btn btn-outline-primary' type='submit'>{% trans "Sign in" %}</button>
     </div>
 </form>
 {% endblock %}
