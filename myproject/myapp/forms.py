@@ -12,6 +12,7 @@ class LoginForm(forms.Form):
 
 class NewTaskForm(forms.Form):
     title = forms.CharField(
+        label='',
         max_length=100,
         widget=forms.TextInput(
             attrs={
